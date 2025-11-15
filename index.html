@@ -12,16 +12,16 @@
         }
 
         :root {
-            --bg-dark: #f8fafc;
+            --bg-dark: #faf8f5;
             --bg-card: #ffffff;
-            --border-color: #e2e8f0;
+            --border-color: #e8e3db;
             --text-primary: #1e293b;
             --text-secondary: #64748b;
             --accent-blue: #3b82f6;
             --accent-green: #10b981;
             --accent-purple: #8b5cf6;
             --accent-orange: #f59e0b;
-            --hover-bg: #f1f5f9;
+            --hover-bg: #f5f2ed;
             --gradient-start: #667eea;
             --gradient-end: #764ba2;
         }
@@ -32,6 +32,22 @@
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 20%, rgba(139, 92, 246, 0.02) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+            z-index: -1;
+            pointer-events: none;
         }
 
         .code-font {
@@ -63,10 +79,19 @@
             font-size: 1.8rem;
             font-weight: 700;
             color: var(--gradient-start);
+            animation: slideInLeft 0.8s ease-out;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 4px 8px rgba(102, 126, 234, 0.3));
         }
 
         .logo span {
             color: var(--accent-green);
+            animation: slideInRight 0.8s ease-out;
         }
 
         nav {
@@ -79,10 +104,28 @@
             text-decoration: none;
             transition: color 0.3s;
             font-size: 0.95rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-blue);
+            transition: width 0.3s;
         }
 
         nav a:hover {
             color: var(--accent-blue);
+            animation: bounce 0.5s ease-in-out;
+        }
+
+        nav a:hover::after {
+            width: 100%;
         }
 
         /* Hero Section */
@@ -187,6 +230,11 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: scaleIn 0.8s ease-out;
+        }
+
+        .scroll-reveal.revealed .section-title {
+            animation: scaleIn 0.8s ease-out;
         }
 
         .section-subtitle {
@@ -239,6 +287,8 @@
         .card-icon {
             font-size: 2.5rem;
             margin-bottom: 1rem;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
         }
 
         .card-title {
@@ -314,6 +364,15 @@
             font-weight: 700;
             color: var(--accent-purple);
             margin-bottom: 0.5rem;
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 20px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .timeline-item:hover .timeline-phase {
+            animation: bounce 0.5s ease-in-out;
         }
 
         .timeline-title {
@@ -346,6 +405,20 @@
             border-bottom: 2px solid transparent;
             margin-bottom: -2px;
             white-space: nowrap;
+            position: relative;
+        }
+
+        .tab::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s;
         }
 
         .tab:hover {
@@ -353,9 +426,26 @@
             background: var(--hover-bg);
         }
 
+        .tab:hover::before {
+            width: 100%;
+            height: 100%;
+        }
+
         .tab.active {
             color: var(--accent-blue);
             border-bottom-color: var(--accent-blue);
+            animation: slideInUp 0.3s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(5px);
+                opacity: 0.5;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .tab-content {
@@ -398,6 +488,20 @@
             justify-content: center;
             font-size: 4rem;
             border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover .product-image {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(16, 185, 129, 0.15));
+        }
+
+        .product-image::after {
+            content: attr(data-emoji);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .product-card:hover .product-image::after {
+            animation: rotateIn 0.6s ease-out;
         }
 
         .product-info {
@@ -415,6 +519,12 @@
             font-weight: 700;
             color: var(--accent-green);
             margin-bottom: 1rem;
+            transition: all 0.3s;
+        }
+
+        .product-card:hover .product-price {
+            transform: scale(1.1);
+            color: var(--gradient-start);
         }
 
         .product-features {
@@ -472,6 +582,13 @@
             font-weight: 700;
             color: var(--accent-green);
             margin-bottom: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .budget-item:hover .budget-amount {
+            color: var(--gradient-start);
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.3));
         }
 
         .budget-description {
@@ -499,6 +616,19 @@
             font-weight: 600;
             font-size: 0.9rem;
             transition: width 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
         }
 
         /* CTA Button */
@@ -515,11 +645,30 @@
             border: none;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
         }
 
         .cta-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            animation: none;
         }
 
         /* Animations */
@@ -554,6 +703,75 @@
             }
         }
 
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes rotateIn {
+            from {
+                opacity: 0;
+                transform: rotate(-10deg) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: rotate(0) scale(1);
+            }
+        }
+
         /* GitHub Style Elements */
         .github-card {
             background: var(--bg-card);
@@ -562,6 +780,29 @@
             padding: 2rem;
             margin-bottom: 2rem;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .github-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.05), transparent);
+            transition: left 0.6s;
+        }
+
+        .github-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .github-card:hover::before {
+            left: 100%;
         }
 
         .github-header {
@@ -580,6 +821,13 @@
             font-size: 1.5rem;
             font-weight: 600;
             color: var(--accent-blue);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .repo-name:hover {
+            color: var(--gradient-start);
+            transform: translateX(5px);
         }
 
         .star-badge {
@@ -590,6 +838,13 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            animation: pulse 3s ease-in-out infinite;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .star-badge:hover {
+            animation: bounce 0.5s ease-in-out;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(16, 185, 129, 0.1));
         }
 
         /* Metrics Dashboard */
@@ -625,6 +880,11 @@
             background-clip: text;
             display: block;
             margin-bottom: 0.5rem;
+            animation: scaleIn 0.8s ease-out;
+        }
+
+        .metric-card:hover .metric-value {
+            animation: pulse 1s ease-in-out infinite;
         }
 
         .metric-label {
@@ -653,11 +913,50 @@
             margin-bottom: 1rem;
         }
 
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            animation: bounce 0.5s ease-in-out;
+        }
+
         .footer-cta {
             font-size: 1.5rem;
             color: var(--accent-green);
             font-weight: 700;
             margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: scaleIn 1s ease-out;
         }
 
         /* Responsive */
@@ -716,6 +1015,40 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Staggered animations */
+        .stagger-1 {
+            animation: fadeInUp 0.6s ease-out 0.1s backwards;
+        }
+
+        .stagger-2 {
+            animation: fadeInUp 0.6s ease-out 0.2s backwards;
+        }
+
+        .stagger-3 {
+            animation: fadeInUp 0.6s ease-out 0.3s backwards;
+        }
+
+        .stagger-4 {
+            animation: fadeInUp 0.6s ease-out 0.4s backwards;
+        }
+
+        .stagger-5 {
+            animation: fadeInUp 0.6s ease-out 0.5s backwards;
+        }
+
+        .stagger-6 {
+            animation: fadeInUp 0.6s ease-out 0.6s backwards;
+        }
+
+        /* Hover animations */
+        .hover-float:hover {
+            animation: float 1s ease-in-out infinite;
+        }
+
+        .hover-bounce:hover {
+            animation: bounce 0.5s ease-in-out;
+        }
     </style>
 </head>
 <body>
@@ -745,19 +1078,19 @@
             <button class="cta-button" onclick="scrollToSection('strategy')">Explore the Strategy</button>
             
             <div class="hero-stats">
-                <div class="stat">
+                <div class="stat stagger-1">
                     <span class="stat-number">$380K+</span>
                     <span class="stat-label">Year 1 Revenue Target</span>
                 </div>
-                <div class="stat">
+                <div class="stat stagger-2">
                     <span class="stat-number">5,000+</span>
                     <span class="stat-label">GitHub Stars Goal</span>
                 </div>
-                <div class="stat">
+                <div class="stat stagger-3">
                     <span class="stat-number">8,000</span>
                     <span class="stat-label">Garment Sales</span>
                 </div>
-                <div class="stat">
+                <div class="stat stagger-4">
                     <span class="stat-number">12 Months</span>
                     <span class="stat-label">Campaign Duration</span>
                 </div>
@@ -1307,6 +1640,11 @@
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        ↑
+    </button>
+
     <script>
         // Tab switching functionality
         function switchTab(tabName) {
@@ -1325,6 +1663,14 @@
             
             // Add active class to clicked tab
             event.target.classList.add('active');
+
+            // Trigger staggered animation for newly visible cards
+            setTimeout(() => {
+                const cards = document.querySelectorAll(`#${tabName} .card`);
+                cards.forEach((card, index) => {
+                    card.style.animation = `fadeInUp 0.6s ease-out ${index * 0.1}s backwards`;
+                });
+            }, 50);
         }
 
         // Smooth scroll to section
@@ -1332,7 +1678,33 @@
             document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Scroll reveal animation
+        // Number counter animation
+        function animateCounter(element, target, duration = 2000) {
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = formatNumber(target);
+                    clearInterval(timer);
+                } else {
+                    element.textContent = formatNumber(Math.floor(current));
+                }
+            }, 16);
+        }
+
+        function formatNumber(num) {
+            if (num >= 1000000) {
+                return (num / 1000000).toFixed(1) + 'M';
+            } else if (num >= 1000) {
+                return (num / 1000).toFixed(0) + 'K';
+            }
+            return num;
+        }
+
+        // Scroll reveal animation with stagger
         function revealOnScroll() {
             const reveals = document.querySelectorAll('.scroll-reveal');
             
@@ -1342,6 +1714,15 @@
                 
                 if (elementTop < window.innerHeight - elementVisible) {
                     element.classList.add('revealed');
+                    
+                    // Add staggered animation to cards within this section
+                    const cards = element.querySelectorAll('.card, .product-card, .metric-card, .budget-item');
+                    cards.forEach((card, index) => {
+                        setTimeout(() => {
+                            card.style.opacity = '0';
+                            card.style.animation = `fadeInUp 0.6s ease-out forwards`;
+                        }, index * 100);
+                    });
                 }
             });
         }
@@ -1358,11 +1739,53 @@
             });
         }
 
+        // Animate timeline items
+        function animateTimeline() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach((item, index) => {
+                const itemTop = item.getBoundingClientRect().top;
+                if (itemTop < window.innerHeight - 100) {
+                    const content = item.querySelector('.timeline-content');
+                    const isEven = index % 2 === 0;
+                    content.style.animation = isEven ? 
+                        `slideInLeft 0.8s ease-out forwards` : 
+                        `slideInRight 0.8s ease-out forwards`;
+                }
+            });
+        }
+
+        // Add floating animation to card icons on hover
+        function addIconAnimations() {
+            const icons = document.querySelectorAll('.card-icon');
+            icons.forEach(icon => {
+                icon.addEventListener('mouseenter', function() {
+                    this.style.animation = 'bounce 0.5s ease-in-out';
+                });
+                icon.addEventListener('animationend', function() {
+                    this.style.animation = 'float 3s ease-in-out infinite';
+                });
+            });
+        }
+
         // Event listeners
-        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('scroll', () => {
+            revealOnScroll();
+            animateTimeline();
+            
+            // Toggle back to top button
+            const backToTop = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
         window.addEventListener('load', () => {
             revealOnScroll();
             animateProgressBars();
+            addIconAnimations();
+            animateTimeline();
         });
 
         // Smooth scroll for navigation links
@@ -1372,6 +1795,13 @@
                 const targetId = this.getAttribute('href').substring(1);
                 document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
             });
+        });
+
+        // Add parallax effect to hero
+        window.addEventListener('scroll', () => {
+            const hero = document.querySelector('.hero');
+            const scrolled = window.pageYOffset;
+            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
         });
     </script>
 </body>
