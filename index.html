@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>deep@work Marketing Campaign | Fashion for Developers</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #1a1f2e;
+            --bg-card: #242b3d;
+            --border-color: #3d4663;
+            --text-primary: #e6edf3;
+            --text-secondary: #a8b3cf;
+            --accent-blue: #58a6ff;
+            --accent-green: #3fb950;
+            --accent-purple: #bc8cff;
+            --accent-orange: #f78166;
+            --hover-bg: #2d3548;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .code-font {
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Header */
+        header {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: rgba(36, 43, 61, 0.95);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+
+        .logo span {
+            color: var(--accent-green);
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 6rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(88, 166, 255, 0.1) 0%, rgba(188, 140, 255, 0.1) 100%);
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(88, 166, 255, 0.03) 2px, rgba(88, 166, 255, 0.03) 4px);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero .tagline {
+            font-size: 1.8rem;
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+
+        .hero .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out 0.6s backwards;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 5rem;
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-blue);
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 10px 30px rgba(88, 166, 255, 0.2);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .card-text {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-color);
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            border-color: var(--accent-purple);
+            box-shadow: 0 5px 20px rgba(188, 140, 255, 0.2);
+        }
+
+        .timeline-marker {
+            width: 20px;
+            height: 20px;
+            background: var(--accent-blue);
+            border: 3px solid var(--bg-dark);
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .timeline-phase {
+            font-weight: 700;
+            color: var(--accent-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--border-color);
+            overflow-x: auto;
+        }
+
+        .tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            white-space: nowrap;
+        }
+
+        .tab:hover {
+            color: var(--text-primary);
+            background: var(--hover-bg);
+        }
+
+        .tab.active {
+            color: var(--accent-blue);
+            border-bottom-color: var(--accent-blue);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(88, 166, 255, 0.3);
+            border-color: var(--accent-green);
+        }
+
+        .product-image {
+            height: 200px;
+            background: linear-gradient(135deg, rgba(88, 166, 255, 0.2), rgba(63, 185, 80, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-blue);
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+        }
+
+        .product-features {
+            list-style: none;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .product-features li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .product-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+            font-weight: 700;
+        }
+
+        /* Budget Breakdown */
+        .budget-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .budget-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-blue);
+            padding: 1.5rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .budget-item:hover {
+            background: var(--hover-bg);
+            border-left-color: var(--accent-green);
+        }
+
+        .budget-category {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .budget-amount {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .budget-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Progress Bars */
+        .progress-bar {
+            background: var(--border-color);
+            border-radius: 10px;
+            height: 30px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 1rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: width 1s ease-out;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(88, 166, 255, 0.4);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* GitHub Style Elements */
+        .github-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .github-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .github-icon {
+            font-size: 2rem;
+            color: var(--accent-blue);
+        }
+
+        .repo-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent-blue);
+        }
+
+        .star-badge {
+            background: var(--border-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Metrics Dashboard */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .metric-card:hover {
+            border-color: var(--accent-blue);
+            transform: scale(1.05);
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 2rem;
+            margin-top: 5rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-cta {
+            font-size: 1.5rem;
+            color: var(--accent-green);
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.3rem;
+            }
+
+            .hero-stats {
+                gap: 1.5rem;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .timeline::before {
+                left: 0;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+                align-items: flex-start;
+                padding-left: 2rem;
+            }
+
+            .timeline-content {
+                width: 100%;
+            }
+
+            .timeline-marker {
+                left: 0;
+                transform: none;
+            }
+
+            .cards-grid,
+            .products-grid,
+            .budget-grid,
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo code-font">deep<span>@work</span></div>
+            <nav>
+                <a href="#overview">Overview</a>
+                <a href="#strategy">Strategy</a>
+                <a href="#products">Products</a>
+                <a href="#timeline">Timeline</a>
+                <a href="#budget">Budget</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="code-font">deep@work</h1>
+            <div class="tagline">"designed by coders for coders"</div>
+            <p class="subtitle">
+                An innovative GitHub-centric marketing campaign to launch the premier developer fashion brand 
+                built on open-source collaboration
+            </p>
+            <button class="cta-button" onclick="scrollToSection('strategy')">Explore the Strategy</button>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">$380K+</span>
+                    <span class="stat-label">Year 1 Revenue Target</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">5,000+</span>
+                    <span class="stat-label">GitHub Stars Goal</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">8,000</span>
+                    <span class="stat-label">Garment Sales</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">12 Months</span>
+                    <span class="stat-label">Campaign Duration</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <div class="container">
+        <section id="overview" class="section scroll-reveal">
+            <div class="section-header">
+                <h2 class="section-title">Executive Summary</h2>
+                <p class="section-subtitle">
+                    A revolutionary approach to fashion that treats design as an open-source collaborative project
+                </p>
+            </div>
+
+            <div class="github-card">
+                <div class="github-header">
+                    <span class="github-icon">📦</span>
+                    <span class="repo-name">deep@work/fashion-collection</span>
+                    <span class="star-badge">⭐ 5,000+ stars (target)</span>
+                </div>
+                <p style="color: var(--text-secondary); line-height: 1.8;">
+                    deep@work leverages <strong style="color: var(--accent-blue);">GitHub as the primary marketing platform</strong>, 
+                    enabling 27.7 million software developers worldwide to contribute design ideas, vote on features, and 
+                    collaborate on garment development through familiar workflows. This approach transforms customers into 
+                    stakeholders and creates authentic community-driven products.
+                </p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3 class="card-title">Target Market</h3>
+                    <p class="card-text">
+                        27.7 million software developers globally, with 58% working remotely or hybrid, 
+                        seeking comfortable yet professional attire that understands their lifestyle.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💡</div>
+                    <h3 class="card-title">Core Innovation</h3>
+                    <p class="card-text">
+                        GitHub-powered co-creation where developers contribute via issues, pull requests, 
+                        and forks—making fashion design collaborative and transparent.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🚀</div>
+                    <h3 class="card-title">Community Focus</h3>
+                    <p class="card-text">
+                        Build 15,000+ engaged developers across platforms with 15-25% contributor-to-customer 
+                        conversion rate through authentic community building.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strategy Section -->
+        <section id="strategy" class="section scroll-reveal">
+            <div class="section-header">
+                <h2 class="section-title">Marketing Strategy</h2>
+                <p class="section-subtitle">
+                    A three-phase approach: Foundation, Launch, and Growth & Scale
+                </p>
+            </div>
+
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('audience')">Target Audience</button>
+                <button class="tab" onclick="switchTab('channels')">Marketing Channels</button>
+                <button class="tab" onclick="switchTab('metrics')">Success Metrics</button>
+            </div>
+
+            <div id="audience" class="tab-content active">
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon">👨‍💻</div>
+                        <h3 class="card-title">Full-Stack & Backend</h3>
+                        <p class="card-text" style="margin-bottom: 1rem;">
+                            <strong>35% Focus</strong><br>
+                            Ages 26-38 • $75K-$180K income<br>
+                            Values comfort during 8-12 hour coding sessions
+                        </p>
+                        <ul class="product-features">
+                            <li>Highly engaged with GitHub</li>
+                            <li>70% remote/hybrid workers</li>
+                            <li>Seeks subtle tech references</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🎨</div>
+                        <h3 class="card-title">Frontend & Designers</h3>
+                        <p class="card-text" style="margin-bottom: 1rem;">
+                            <strong>25% Focus</strong><br>
+                            Ages 24-35 • $65K-$140K income<br>
+                            Aesthetically driven, values visual presentation
+                        </p>
+                        <ul class="product-features">
+                            <li>Active on visual platforms</li>
+                            <li>Excited by design details</li>
+                            <li>Camera-ready for client calls</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">⚙️</div>
+                        <h3 class="card-title">DevOps & Cloud Engineers</h3>
+                        <p class="card-text" style="margin-bottom: 1rem;">
+                            <strong>20% Focus</strong><br>
+                            Ages 28-40 • $90K-$200K income<br>
+                            Practical and efficiency-focused
+                        </p>
+                        <ul class="product-features">
+                            <li>Works irregular hours (on-call)</li>
+                            <li>Values durability & reliability</li>
+                            <li>Active open-source contributors</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="channels" class="tab-content">
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon">🐙</div>
+                        <h3 class="card-title">GitHub (Primary)</h3>
+                        <p class="card-text">
+                            Main platform for design collaboration, issue tracking, and community building. 
+                            Target: 5,000 stars, 500 active contributors.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">💬</div>
+                        <h3 class="card-title">Discord Community</h3>
+                        <p class="card-text">
+                            Real-time discussions, design feedback, and community events. 
+                            Target: 3,000 active members.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">📧</div>
+                        <h3 class="card-title">Email Marketing</h3>
+                        <p class="card-text">
+                            Targeted campaigns to engaged subscribers with 35-40% open rates. 
+                            Target: 10,000 subscribers.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">📱</div>
+                        <h3 class="card-title">Social Media</h3>
+                        <p class="card-text">
+                            Twitter, LinkedIn, Instagram, TikTok targeting developer communities. 
+                            Target: 43,000 combined followers.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">✍️</div>
+                        <h3 class="card-title">Content Marketing</h3>
+                        <p class="card-text">
+                            Dev.to articles, technical blog posts, and developer lifestyle content. 
+                            Focus on authenticity and value.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🤝</div>
+                        <h3 class="card-title">Partnerships</h3>
+                        <p class="card-text">
+                            Collaborate with developer influencers, tech conferences, and open-source projects. 
+                            Ambassador program with 50 members.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="metrics" class="tab-content">
+                <h3 style="margin-bottom: 2rem; color: var(--accent-blue);">12-Month Success Metrics</h3>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <span class="metric-value">5,000</span>
+                        <span class="metric-label">GitHub Stars</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">500+</span>
+                        <span class="metric-label">Active Contributors</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">8,000</span>
+                        <span class="metric-label">Garment Sales</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">15K+</span>
+                        <span class="metric-label">Community Members</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">20-25%</span>
+                        <span class="metric-label">Contributor Conversion</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">60+</span>
+                        <span class="metric-label">Net Promoter Score</span>
+                    </div>
+                </div>
+
+                <h3 style="margin: 3rem 0 1.5rem; color: var(--accent-green);">Engagement Rates</h3>
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <div style="margin-bottom: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>Email Open Rate</span>
+                            <span style="color: var(--accent-green);">35-40%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 37%;">37%</div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>Email Click-Through Rate</span>
+                            <span style="color: var(--accent-green);">8-12%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 10%;">10%</div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>Social Media Engagement</span>
+                            <span style="color: var(--accent-green);">6-10%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 8%;">8%</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>Email Conversion Rate</span>
+                            <span style="color: var(--accent-green);">15-20%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 17%;">17%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="section scroll-reveal">
+            <div class="section-header">
+                <h2 class="section-title">Product Line</h2>
+                <p class="section-subtitle">
+                    Co-designed with the developer community for maximum comfort and functionality
+                </p>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">🧥</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Focus Mode Hoodie</h3>
+                        <div class="product-price">$85</div>
+                        <ul class="product-features">
+                            <li>Thumb holes for warmth</li>
+                            <li>Silent kangaroo pocket</li>
+                            <li>Extra soft interior</li>
+                            <li>Noise-dampening hood</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">👖</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Infinite Loop Joggers</h3>
+                        <div class="product-price">$75</div>
+                        <ul class="product-features">
+                            <li>4-way stretch fabric</li>
+                            <li>Phone pocket with security</li>
+                            <li>Temperature regulation</li>
+                            <li>Zero restriction waistband</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">👕</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Stand-Up Polo</h3>
+                        <div class="product-price">$65</div>
+                        <ul class="product-features">
+                            <li>Video call appropriate</li>
+                            <li>Moisture-wicking fabric</li>
+                            <li>Anti-wrinkle technology</li>
+                            <li>Breathable & stretchy</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">👔</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Async Henley</h3>
+                        <div class="product-price">$55</div>
+                        <ul class="product-features">
+                            <li>Layering friendly</li>
+                            <li>Soft bamboo blend</li>
+                            <li>Odor resistant</li>
+                            <li>No-chafe seams</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🧦</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Commit Socks (3-Pack)</h3>
+                        <div class="product-price">$45</div>
+                        <ul class="product-features">
+                            <li>Cushioned arch support</li>
+                            <li>Merino wool blend</li>
+                            <li>No-slip design</li>
+                            <li>Temperature adaptive</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">👕</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Merge Request Tee</h3>
+                        <div class="product-price">$45</div>
+                        <ul class="product-features">
+                            <li>Premium organic cotton</li>
+                            <li>Screen-cleaning patch</li>
+                            <li>Longer back hem</li>
+                            <li>Tagless comfort</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline Section -->
+        <section id="timeline" class="section scroll-reveal">
+            <div class="section-header">
+                <h2 class="section-title">Campaign Timeline</h2>
+                <p class="section-subtitle">
+                    12-month roadmap from foundation to sustainable growth
+                </p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-phase">Q1 • Months 1-3</div>
+                        <h3 class="timeline-title">Foundation Phase</h3>
+                        <p class="timeline-description">
+                            Launch GitHub repository with design framework • Recruit 1,000 stars & 50 contributors • 
+                            Build 2,000 email subscribers • Generate 500 beta pre-orders • Establish platform presence
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-phase">Q2 • Months 4-6</div>
+                        <h3 class="timeline-title">Launch Phase</h3>
+                        <p class="timeline-description">
+                            Official product launch (3 products) • Grow to 2,500 GitHub stars & 200 contributors • 
+                            Reach 5,000 email subscribers • Achieve 2,500 garment sales • Host first Code & Design Jam
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-phase">Q3 • Months 7-9</div>
+                        <h3 class="timeline-title">Growth Phase</h3>
+                        <p class="timeline-description">
+                            Expand to full product line (6 products) • Reach 4,000 GitHub stars • 
+                            Launch Ambassador Program with 50 influencers • Begin hackathon sponsorships • 
+                            Generate 1.2M impressions
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-phase">Q4 • Months 10-12</div>
+                        <h3 class="timeline-title">Scale Phase</h3>
+                        <p class="timeline-description">
+                            Holiday campaign & limited editions • Reach 5,000 GitHub stars & 500 contributors • 
+                            10,000 email subscribers • International expansion • Sustainable growth systems operational
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Budget Section -->
+        <section id="budget" class="section scroll-reveal">
+            <div class="section-header">
+                <h2 class="section-title">Budget Breakdown</h2>
+                <p class="section-subtitle">
+                    Lean startup approach: $10K-$18K total investment for Year 1
+                </p>
+            </div>
+
+            <div class="budget-grid">
+                <div class="budget-item">
+                    <div class="budget-category">Content Creation</div>
+                    <div class="budget-amount">$2,500</div>
+                    <p class="budget-description">
+                        Photography, videography, social media content, blog articles, design assets
+                    </p>
+                </div>
+
+                <div class="budget-item">
+                    <div class="budget-category">Platform Tools</div>
+                    <div class="budget-amount">$3,000</div>
+                    <p class="budget-description">
+                        Shopify, email marketing (ConvertKit), analytics, social media management, Discord
+                    </p>
+                </div>
+
+                <div class="budget-item">
+                    <div class="budget-category">Paid Advertising</div>
+                    <div class="budget-amount">$4,000</div>
+                    <p class="budget-description">
+                        Strategic ads on Twitter, Reddit, dev.to • Retargeting campaigns • A/B testing
+                    </p>
+                </div>
+
+                <div class="budget-item">
+                    <div class="budget-category">Influencer & Partnerships</div>
+                    <div class="budget-amount">$3,000</div>
+                    <p class="budget-description">
+                        Micro-influencer collaborations, conference sponsorships, ambassador program
+                    </p>
+                </div>
+
+                <div class="budget-item">
+                    <div class="budget-category">Community Events</div>
+                    <div class="budget-amount">$2,000</div>
+                    <p class="budget-description">
+                        Virtual hackathons, Code & Design Jams, contributor rewards, swag
+                    </p>
+                </div>
+
+                <div class="budget-item">
+                    <div class="budget-category">Product Samples</div>
+                    <div class="budget-amount">$2,000</div>
+                    <p class="budget-description">
+                        Beta testing units, influencer seeding, photo samples, quality control
+                    </p>
+                </div>
+
+                <div class="budget-item">
+                    <div class="budget-category">Miscellaneous</div>
+                    <div class="budget-amount">$1,500</div>
+                    <p class="budget-description">
+                        Contingency fund, unexpected opportunities, market research, testing
+                    </p>
+                </div>
+            </div>
+
+            <div style="margin-top: 3rem; padding: 2rem; background: var(--bg-card); border: 1px solid var(--accent-green); border-radius: 8px; text-align: center;">
+                <h3 style="color: var(--accent-green); margin-bottom: 1rem; font-size: 1.8rem;">Expected ROI</h3>
+                <div style="display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap;">
+                    <div>
+                        <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent-blue);">$380K+</div>
+                        <div style="color: var(--text-secondary);">Year 1 Revenue</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent-purple);">21x</div>
+                        <div style="color: var(--text-secondary);">Return on Investment</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent-green);">$2M+</div>
+                        <div style="color: var(--text-secondary);">Year 2 Potential</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section class="section scroll-reveal" style="text-align: center; padding: 5rem 2rem; background: linear-gradient(135deg, rgba(88, 166, 255, 0.05) 0%, rgba(188, 140, 255, 0.05) 100%); border-radius: 12px;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--accent-blue);">
+                Why deep@work Will Succeed
+            </h2>
+            <p style="font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 2rem;">
+                By treating developers as co-creators rather than just customers, deep@work builds a loyal, 
+                engaged community that not only buys products but becomes brand ambassadors.
+            </p>
+            
+            <div class="cards-grid" style="margin-top: 3rem;">
+                <div class="card">
+                    <div class="card-icon">🚀</div>
+                    <h3 class="card-title">First Mover Advantage</h3>
+                    <p class="card-text">
+                        No other fashion brand has truly leveraged open-source collaboration at this scale
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🤝</div>
+                    <h3 class="card-title">Community Ownership</h3>
+                    <p class="card-text">
+                        Contributors feel invested in the brand, creating authentic word-of-mouth marketing
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💎</div>
+                    <h3 class="card-title">Insider Authenticity</h3>
+                    <p class="card-text">
+                        Built by developers who code daily, not a corporate brand trying to market to developers
+                    </p>
+                </div>
+            </div>
+
+            <div style="margin-top: 3rem;">
+                <button class="cta-button" style="font-size: 1.3rem; padding: 1.2rem 3rem;">
+                    Ready to merge? 🚀
+                </button>
+                <p style="margin-top: 1rem; color: var(--text-secondary);">
+                    Let's build this together. On GitHub. For developers. By developers.
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-cta code-font">deep@work</div>
+            <p class="footer-text">
+                Marketing Campaign Proposal • 12 Months • $10K-$18K Budget
+            </p>
+            <p class="footer-text">
+                "designed by coders for coders"
+            </p>
+            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 2rem;">
+                Campaign prepared by Market Research Analyst Agent • November 2025
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Tab switching functionality
+        function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        // Smooth scroll to section
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Scroll reveal animation
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.scroll-reveal');
+            
+            reveals.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('revealed');
+                }
+            });
+        }
+
+        // Initialize progress bars animation
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        }
+
+        // Event listeners
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', () => {
+            revealOnScroll();
+            animateProgressBars();
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
