@@ -19,11 +19,11 @@
             --text-secondary: #64748b;
             --accent-blue: #3b82f6;
             --accent-green: #10b981;
-            --accent-purple: #8b5cf6;
+            --accent-purple: #06b6d4;
             --accent-orange: #f59e0b;
             --hover-bg: #f5f2ed;
-            --gradient-start: #667eea;
-            --gradient-end: #764ba2;
+            --gradient-start: #3b82f6;
+            --gradient-end: #06b6d4;
         }
 
         body {
@@ -42,9 +42,9 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.03) 0%, transparent 50%),
+            background: radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
                         radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.03) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 20%, rgba(139, 92, 246, 0.02) 0%, transparent 50%);
+                        radial-gradient(circle at 40% 20%, rgba(6, 182, 212, 0.02) 0%, transparent 50%);
             animation: float 20s ease-in-out infinite;
             z-index: -1;
             pointer-events: none;
@@ -56,15 +56,28 @@
 
         /* Header */
         header {
-            background: var(--bg-card);
-            border-bottom: 1px solid var(--border-color);
+            background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #10b981 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 15s ease infinite;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             padding: 1.5rem 2rem;
             position: sticky;
             top: 0;
             z-index: 1000;
             backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         .header-content {
@@ -73,39 +86,93 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
+        }
+
+        .header-content::before,
+        .header-content::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .header-content::before {
+            width: 100px;
+            height: 100px;
+            top: -30px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .header-content::after {
+            width: 80px;
+            height: 80px;
+            top: -20px;
+            right: 15%;
+            animation-delay: 3s;
         }
 
         .logo {
             font-size: 1.8rem;
             font-weight: 700;
-            color: var(--gradient-start);
+            color: #ffffff;
             animation: slideInLeft 0.8s ease-out;
             cursor: pointer;
             transition: all 0.3s;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 10;
         }
 
         .logo:hover {
             transform: scale(1.05);
-            filter: drop-shadow(0 4px 8px rgba(102, 126, 234, 0.3));
+            filter: drop-shadow(0 4px 8px rgba(255, 255, 255, 0.3));
         }
 
         .logo span {
-            color: var(--accent-green);
+            color: #fbbf24;
             animation: slideInRight 0.8s ease-out;
         }
 
         nav {
             display: flex;
             gap: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        nav::before {
+            content: '✨';
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            animation: sparkle 3s ease-in-out infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 0.8;
+                transform: translateY(-50%) scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-50%) scale(1.2);
+            }
         }
 
         nav a {
-            color: var(--text-secondary);
+            color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
             transition: color 0.3s;
             font-size: 0.95rem;
             position: relative;
             display: inline-block;
+            font-weight: 500;
         }
 
         nav a::after {
@@ -115,13 +182,14 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--accent-blue);
+            background: #fbbf24;
             transition: width 0.3s;
         }
 
         nav a:hover {
-            color: var(--accent-blue);
+            color: #ffffff;
             animation: bounce 0.5s ease-in-out;
+            text-shadow: 0 2px 8px rgba(255, 255, 255, 0.5);
         }
 
         nav a:hover::after {
@@ -132,7 +200,7 @@
         .hero {
             padding: 6rem 2rem;
             text-align: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
             border-bottom: 1px solid var(--border-color);
             position: relative;
             overflow: hidden;
@@ -345,7 +413,7 @@
 
         .timeline-content:hover {
             border-color: var(--accent-purple);
-            box-shadow: 0 5px 20px rgba(139, 92, 246, 0.15);
+            box-shadow: 0 5px 20px rgba(6, 182, 212, 0.15);
         }
 
         .timeline-marker {
@@ -362,11 +430,11 @@
 
         .timeline-phase {
             font-weight: 700;
-            color: var(--accent-purple);
+            color: #06b6d4;
             margin-bottom: 0.5rem;
             display: inline-block;
             padding: 0.3rem 0.8rem;
-            background: rgba(139, 92, 246, 0.1);
+            background: rgba(6, 182, 212, 0.1);
             border-radius: 20px;
             animation: fadeIn 0.8s ease-out;
         }
@@ -415,7 +483,7 @@
             left: 50%;
             width: 0;
             height: 0;
-            background: rgba(102, 126, 234, 0.1);
+            background: rgba(59, 130, 246, 0.1);
             border-radius: 50%;
             transform: translate(-50%, -50%);
             transition: width 0.3s, height 0.3s;
@@ -482,7 +550,7 @@
 
         .product-image {
             height: 200px;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(16, 185, 129, 0.1));
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.1));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -492,7 +560,7 @@
         }
 
         .product-card:hover .product-image {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(16, 185, 129, 0.15));
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(16, 185, 129, 0.15));
         }
 
         .product-image::after {
@@ -644,7 +712,7 @@
             transition: all 0.3s;
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
             position: relative;
             overflow: hidden;
             animation: pulse 2s ease-in-out infinite;
@@ -667,7 +735,7 @@
 
         .cta-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
             animation: none;
         }
 
@@ -792,7 +860,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.05), transparent);
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.05), transparent);
             transition: left 0.6s;
         }
 
@@ -844,7 +912,7 @@
 
         .star-badge:hover {
             animation: bounce 0.5s ease-in-out;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(16, 185, 129, 0.1));
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.1));
         }
 
         /* Metrics Dashboard */
@@ -933,7 +1001,7 @@
             transform: translateY(100px);
             transition: all 0.3s ease;
             z-index: 1000;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
         }
 
         .back-to-top.visible {
@@ -943,7 +1011,7 @@
 
         .back-to-top:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
             animation: bounce 0.5s ease-in-out;
         }
 
@@ -974,6 +1042,19 @@
             }
 
             nav {
+                display: none;
+            }
+
+            nav::before {
+                display: none;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .header-content::before,
+            .header-content::after {
                 display: none;
             }
 
@@ -1580,7 +1661,7 @@
         </section>
 
         <!-- Final CTA Section -->
-        <section class="section scroll-reveal" style="text-align: center; padding: 5rem 2rem; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%); border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);">
+        <section class="section scroll-reveal" style="text-align: center; padding: 5rem 2rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%); border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);">
             <h2 style="font-size: 2.5rem; margin-bottom: 1rem; background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
                 Why deep@work Will Succeed
             </h2>
