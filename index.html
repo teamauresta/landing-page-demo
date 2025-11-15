@@ -12,16 +12,18 @@
         }
 
         :root {
-            --bg-dark: #1a1f2e;
-            --bg-card: #242b3d;
-            --border-color: #3d4663;
-            --text-primary: #e6edf3;
-            --text-secondary: #a8b3cf;
-            --accent-blue: #58a6ff;
-            --accent-green: #3fb950;
-            --accent-purple: #bc8cff;
-            --accent-orange: #f78166;
-            --hover-bg: #2d3548;
+            --bg-dark: #f8fafc;
+            --bg-card: #ffffff;
+            --border-color: #e2e8f0;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+            --accent-purple: #8b5cf6;
+            --accent-orange: #f59e0b;
+            --hover-bg: #f1f5f9;
+            --gradient-start: #667eea;
+            --gradient-end: #764ba2;
         }
 
         body {
@@ -45,7 +47,8 @@
             top: 0;
             z-index: 1000;
             backdrop-filter: blur(10px);
-            background: rgba(36, 43, 61, 0.95);
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .header-content {
@@ -59,7 +62,7 @@
         .logo {
             font-size: 1.8rem;
             font-weight: 700;
-            color: var(--accent-blue);
+            color: var(--gradient-start);
         }
 
         .logo span {
@@ -86,7 +89,7 @@
         .hero {
             padding: 6rem 2rem;
             text-align: center;
-            background: linear-gradient(135deg, rgba(88, 166, 255, 0.1) 0%, rgba(188, 140, 255, 0.1) 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-bottom: 1px solid var(--border-color);
             position: relative;
             overflow: hidden;
@@ -100,7 +103,7 @@
             right: 0;
             bottom: 0;
             background: 
-                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(88, 166, 255, 0.03) 2px, rgba(88, 166, 255, 0.03) 4px);
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, 0.05) 2px, rgba(255, 255, 255, 0.05) 4px);
             pointer-events: none;
         }
 
@@ -114,16 +117,14 @@
         .hero h1 {
             font-size: 4rem;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             animation: fadeInUp 0.8s ease-out;
         }
 
         .hero .tagline {
             font-size: 1.8rem;
-            color: var(--accent-green);
+            color: #fbbf24;
             margin-bottom: 1rem;
             font-weight: 600;
             animation: fadeInUp 0.8s ease-out 0.2s backwards;
@@ -131,7 +132,7 @@
 
         .hero .subtitle {
             font-size: 1.2rem;
-            color: var(--text-secondary);
+            color: rgba(255, 255, 255, 0.9);
             max-width: 700px;
             margin: 0 auto 2rem;
             animation: fadeInUp 0.8s ease-out 0.4s backwards;
@@ -153,12 +154,12 @@
         .stat-number {
             font-size: 2.5rem;
             font-weight: 700;
-            color: var(--accent-green);
+            color: #ffffff;
             display: block;
         }
 
         .stat-label {
-            color: var(--text-secondary);
+            color: rgba(255, 255, 255, 0.8);
             font-size: 0.9rem;
         }
 
@@ -182,7 +183,10 @@
         .section-title {
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            color: var(--accent-blue);
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .section-subtitle {
@@ -207,6 +211,7 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .card::before {
@@ -224,7 +229,7 @@
         .card:hover {
             transform: translateY(-5px);
             border-color: var(--accent-blue);
-            box-shadow: 0 10px 30px rgba(88, 166, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
         }
 
         .card:hover::before {
@@ -285,11 +290,12 @@
             border-radius: 8px;
             padding: 2rem;
             transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .timeline-content:hover {
             border-color: var(--accent-purple);
-            box-shadow: 0 5px 20px rgba(188, 140, 255, 0.2);
+            box-shadow: 0 5px 20px rgba(139, 92, 246, 0.15);
         }
 
         .timeline-marker {
@@ -375,17 +381,18 @@
             overflow: hidden;
             transition: all 0.3s ease;
             cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .product-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(88, 166, 255, 0.3);
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.15);
             border-color: var(--accent-green);
         }
 
         .product-image {
             height: 200px;
-            background: linear-gradient(135deg, rgba(88, 166, 255, 0.2), rgba(63, 185, 80, 0.2));
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(16, 185, 129, 0.1));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -444,11 +451,13 @@
             padding: 1.5rem;
             border-radius: 4px;
             transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .budget-item:hover {
             background: var(--hover-bg);
             border-left-color: var(--accent-green);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
         }
 
         .budget-category {
@@ -496,7 +505,7 @@
         .cta-button {
             display: inline-block;
             padding: 1rem 2.5rem;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             color: white;
             text-decoration: none;
             border-radius: 6px;
@@ -505,11 +514,12 @@
             transition: all 0.3s;
             border: none;
             cursor: pointer;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
 
         .cta-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(88, 166, 255, 0.4);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
         }
 
         /* Animations */
@@ -551,6 +561,7 @@
             border-radius: 6px;
             padding: 2rem;
             margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .github-header {
@@ -596,11 +607,13 @@
             padding: 1.5rem;
             text-align: center;
             transition: all 0.3s;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .metric-card:hover {
             border-color: var(--accent-blue);
             transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.15);
         }
 
         .metric-value {
@@ -626,6 +639,7 @@
             padding: 3rem 2rem;
             margin-top: 5rem;
             text-align: center;
+            box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .footer-content {
@@ -919,7 +933,7 @@
             </div>
 
             <div id="metrics" class="tab-content">
-                <h3 style="margin-bottom: 2rem; color: var(--accent-blue);">12-Month Success Metrics</h3>
+                <h3 style="margin-bottom: 2rem; background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: 1.8rem; font-weight: 700;">12-Month Success Metrics</h3>
                 <div class="metrics-grid">
                     <div class="metric-card">
                         <span class="metric-value">5,000</span>
@@ -1213,7 +1227,7 @@
                 </div>
             </div>
 
-            <div style="margin-top: 3rem; padding: 2rem; background: var(--bg-card); border: 1px solid var(--accent-green); border-radius: 8px; text-align: center;">
+            <div style="margin-top: 3rem; padding: 2rem; background: var(--bg-card); border: 2px solid var(--accent-green); border-radius: 8px; text-align: center; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.1);">
                 <h3 style="color: var(--accent-green); margin-bottom: 1rem; font-size: 1.8rem;">Expected ROI</h3>
                 <div style="display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap;">
                     <div>
@@ -1233,8 +1247,8 @@
         </section>
 
         <!-- Final CTA Section -->
-        <section class="section scroll-reveal" style="text-align: center; padding: 5rem 2rem; background: linear-gradient(135deg, rgba(88, 166, 255, 0.05) 0%, rgba(188, 140, 255, 0.05) 100%); border-radius: 12px;">
-            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--accent-blue);">
+        <section class="section scroll-reveal" style="text-align: center; padding: 5rem 2rem; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%); border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
                 Why deep@work Will Succeed
             </h2>
             <p style="font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 2rem;">
