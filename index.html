@@ -60,12 +60,38 @@
             background-size: 200% 200%;
             animation: gradientShift 15s ease infinite;
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 1.5rem 2rem;
+            padding: 2rem 2rem 1.5rem 2rem;
             position: sticky;
             top: 0;
             z-index: 1000;
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+            position: relative;
+        }
+
+        header::before,
+        header::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        header::before {
+            top: 0;
+            left: 0;
+            border-right: none;
+            border-bottom: none;
+            border-top-left-radius: 0;
+        }
+
+        header::after {
+            top: 0;
+            right: 0;
+            border-left: none;
+            border-bottom: none;
+            border-top-right-radius: 0;
         }
 
         @keyframes gradientShift {
@@ -89,29 +115,41 @@
             position: relative;
         }
 
-        .header-content::before,
-        .header-content::after {
+        .header-content::before {
             content: '';
             position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .header-content::before {
-            width: 100px;
-            height: 100px;
-            top: -30px;
-            left: 10%;
-            animation-delay: 0s;
+            top: -1.5rem;
+            left: 0;
+            right: 0;
+            height: 120%;
+            background-image: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 10px,
+                    rgba(255, 255, 255, 0.02) 10px,
+                    rgba(255, 255, 255, 0.02) 20px
+                );
+            pointer-events: none;
+            z-index: 1;
         }
 
         .header-content::after {
-            width: 80px;
-            height: 80px;
-            top: -20px;
-            right: 15%;
-            animation-delay: 3s;
+            content: 'TRUSTED BY DEVELOPERS';
+            position: absolute;
+            right: 0;
+            top: -25px;
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            padding: 0.25rem 0.7rem;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .logo {
@@ -126,9 +164,31 @@
             z-index: 10;
         }
 
+        .logo::after {
+            content: 'PREMIUM';
+            font-size: 0.5rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: #fbbf24;
+            background: rgba(251, 191, 36, 0.2);
+            border: 1px solid rgba(251, 191, 36, 0.5);
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(251, 191, 36, 0.3);
+            backdrop-filter: blur(10px);
+            margin-left: 1rem;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
         .logo:hover {
             transform: scale(1.05);
-            filter: drop-shadow(0 4px 8px rgba(255, 255, 255, 0.3));
+        }
+
+        .logo:hover::after {
+            background: rgba(251, 191, 36, 0.3);
+            border-color: rgba(251, 191, 36, 0.7);
+            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
         }
 
         .logo span {
@@ -144,25 +204,15 @@
         }
 
         nav::before {
-            content: '✨';
+            content: '';
             position: absolute;
-            right: -30px;
+            left: -2.5rem;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 1.2rem;
-            animation: sparkle 3s ease-in-out infinite;
-            opacity: 0.8;
-        }
-
-        @keyframes sparkle {
-            0%, 100% {
-                opacity: 0.8;
-                transform: translateY(-50%) scale(1);
-            }
-            50% {
-                opacity: 1;
-                transform: translateY(-50%) scale(1.2);
-            }
+            width: 3px;
+            height: 30px;
+            background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+            border-radius: 2px;
         }
 
         nav a {
@@ -328,6 +378,7 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            opacity: 1;
         }
 
         .card::before {
@@ -525,6 +576,10 @@
             display: block;
         }
 
+        .tab-content .card {
+            opacity: 1;
+        }
+
         /* Products Grid */
         .products-grid {
             display: grid;
@@ -540,6 +595,7 @@
             transition: all 0.3s ease;
             cursor: pointer;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            opacity: 1;
         }
 
         .product-card:hover {
@@ -630,6 +686,7 @@
             border-radius: 4px;
             transition: all 0.3s ease;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            opacity: 1;
         }
 
         .budget-item:hover {
@@ -931,6 +988,7 @@
             text-align: center;
             transition: all 0.3s;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            opacity: 1;
         }
 
         .metric-card:hover {
@@ -1053,8 +1111,21 @@
                 font-size: 1.5rem;
             }
 
-            .header-content::before,
+            .logo::after {
+                font-size: 0.45rem;
+                padding: 0.2rem 0.4rem;
+            }
+
+            .header-content::before {
+                display: none;
+            }
+
             .header-content::after {
+                display: none;
+            }
+
+            header::before,
+            header::after {
                 display: none;
             }
 
@@ -1097,31 +1168,6 @@
             transform: translateY(0);
         }
 
-        /* Staggered animations */
-        .stagger-1 {
-            animation: fadeInUp 0.6s ease-out 0.1s backwards;
-        }
-
-        .stagger-2 {
-            animation: fadeInUp 0.6s ease-out 0.2s backwards;
-        }
-
-        .stagger-3 {
-            animation: fadeInUp 0.6s ease-out 0.3s backwards;
-        }
-
-        .stagger-4 {
-            animation: fadeInUp 0.6s ease-out 0.4s backwards;
-        }
-
-        .stagger-5 {
-            animation: fadeInUp 0.6s ease-out 0.5s backwards;
-        }
-
-        .stagger-6 {
-            animation: fadeInUp 0.6s ease-out 0.6s backwards;
-        }
-
         /* Hover animations */
         .hover-float:hover {
             animation: float 1s ease-in-out infinite;
@@ -1159,19 +1205,19 @@
             <button class="cta-button" onclick="scrollToSection('strategy')">Explore the Strategy</button>
             
             <div class="hero-stats">
-                <div class="stat stagger-1">
+                <div class="stat" style="animation: fadeInUp 0.8s ease-out 0.1s both;">
                     <span class="stat-number">$380K+</span>
                     <span class="stat-label">Year 1 Revenue Target</span>
                 </div>
-                <div class="stat stagger-2">
+                <div class="stat" style="animation: fadeInUp 0.8s ease-out 0.2s both;">
                     <span class="stat-number">5,000+</span>
                     <span class="stat-label">GitHub Stars Goal</span>
                 </div>
-                <div class="stat stagger-3">
+                <div class="stat" style="animation: fadeInUp 0.8s ease-out 0.3s both;">
                     <span class="stat-number">8,000</span>
                     <span class="stat-label">Garment Sales</span>
                 </div>
-                <div class="stat stagger-4">
+                <div class="stat" style="animation: fadeInUp 0.8s ease-out 0.4s both;">
                     <span class="stat-number">12 Months</span>
                     <span class="stat-label">Campaign Duration</span>
                 </div>
@@ -1740,18 +1786,23 @@
             });
             
             // Show selected tab content
-            document.getElementById(tabName).classList.add('active');
+            const selectedContent = document.getElementById(tabName);
+            selectedContent.classList.add('active');
             
             // Add active class to clicked tab
             event.target.classList.add('active');
 
             // Trigger staggered animation for newly visible cards
-            setTimeout(() => {
-                const cards = document.querySelectorAll(`#${tabName} .card`);
-                cards.forEach((card, index) => {
-                    card.style.animation = `fadeInUp 0.6s ease-out ${index * 0.1}s backwards`;
-                });
-            }, 50);
+            const cards = selectedContent.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 80);
+            });
         }
 
         // Smooth scroll to section
@@ -1794,16 +1845,24 @@
                 const elementVisible = 150;
                 
                 if (elementTop < window.innerHeight - elementVisible) {
-                    element.classList.add('revealed');
-                    
-                    // Add staggered animation to cards within this section
-                    const cards = element.querySelectorAll('.card, .product-card, .metric-card, .budget-item');
-                    cards.forEach((card, index) => {
-                        setTimeout(() => {
-                            card.style.opacity = '0';
-                            card.style.animation = `fadeInUp 0.6s ease-out forwards`;
-                        }, index * 100);
-                    });
+                    if (!element.classList.contains('revealed')) {
+                        element.classList.add('revealed');
+                        
+                        // Add staggered animation to cards within this section only once
+                        const cards = element.querySelectorAll('.card, .product-card, .metric-card, .budget-item');
+                        cards.forEach((card, index) => {
+                            if (!card.dataset.animated) {
+                                card.style.opacity = '0';
+                                card.style.transform = 'translateY(20px)';
+                                setTimeout(() => {
+                                    card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                                    card.style.opacity = '1';
+                                    card.style.transform = 'translateY(0)';
+                                }, index * 100);
+                                card.dataset.animated = 'true';
+                            }
+                        });
+                    }
                 }
             });
         }
@@ -1827,10 +1886,19 @@
                 const itemTop = item.getBoundingClientRect().top;
                 if (itemTop < window.innerHeight - 100) {
                     const content = item.querySelector('.timeline-content');
-                    const isEven = index % 2 === 0;
-                    content.style.animation = isEven ? 
-                        `slideInLeft 0.8s ease-out forwards` : 
-                        `slideInRight 0.8s ease-out forwards`;
+                    if (!content.dataset.animated) {
+                        const isEven = index % 2 === 0;
+                        content.style.opacity = '0';
+                        content.style.transform = isEven ? 'translateX(-30px)' : 'translateX(30px)';
+                        
+                        setTimeout(() => {
+                            content.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+                            content.style.opacity = '1';
+                            content.style.transform = 'translateX(0)';
+                        }, 100);
+                        
+                        content.dataset.animated = 'true';
+                    }
                 }
             });
         }
